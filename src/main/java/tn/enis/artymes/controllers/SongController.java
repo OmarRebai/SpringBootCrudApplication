@@ -5,7 +5,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tn.enis.artymes.dto.SongDto;
-import tn.enis.artymes.model.Song;
 import tn.enis.artymes.services.SongService;
 
 import javax.validation.Valid;
@@ -23,13 +22,13 @@ public class SongController {
         this.songService = songService;
     }
 
-    @PostMapping("/add")
+    @PostMapping
     public ResponseEntity<SongDto> addSong (@Valid @RequestBody SongDto songDto) {
         SongDto newSong = songService.createSong(songDto);
         return new ResponseEntity<>(newSong, HttpStatus.CREATED);
     }
 
-    @GetMapping("/all")
+    @GetMapping
     public ResponseEntity<List<SongDto>> getAllSongs () {
         List<SongDto> songs = songService.getAllSongs();
         return new ResponseEntity<>(songs, HttpStatus.OK);
@@ -43,15 +42,14 @@ public class SongController {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @DeleteMapping("delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteSong (@PathVariable Long id) {
         songService.deleteSong(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @GetMapping("/entities")
-    public ResponseEntity<List<Song>> getAllSongEntities () {
-        List<Song> songs = songService.getAllSongsEntities();
-        return new ResponseEntity<>(songs, HttpStatus.OK);
+    public ResponseEntity<List<SongDto>> getAllSongEntities () {
+		return ResponseEntity.ok(songService.getAllSongsEntities());
     }
 }

@@ -1,18 +1,11 @@
 package tn.enis.artymes.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import tn.enis.artymes.config.ClientSerializer;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -39,7 +32,6 @@ public class Song {
 
 	@ManyToOne
 	@JoinColumn(name = "client_id")
-	@JsonSerialize(using = ClientSerializer.class)
 	private Client client;
 
 	@OneToMany(mappedBy = "song")
