@@ -30,12 +30,10 @@ public class Song {
 	@OneToMany(mappedBy = "song")
 	private List<Part> parts = new ArrayList<>();
 
-	@OneToMany(mappedBy = "song", cascade = CascadeType.ALL)
-	private List<SongPart> songParts = new ArrayList<>();
-	public Song(Long id, String title, String beatUrl, Client client) {
-		this.id = id;
-		this.title = title;
-		this.beatUrl = beatUrl;
-		this.client = client;
-	}
+//	public Song(Long id, String title, String beatUrl, Client client) {
+//		this.id = id;
+//		this.title = title;
+//		this.beatUrl = beatUrl;
+//		this.client = client;
+//	}
 }

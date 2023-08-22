@@ -26,8 +26,6 @@ public class Part {
     @OneToMany(mappedBy = "part")
     private List<Bar> bars = new ArrayList<>();
 
-    @OneToMany(mappedBy = "part", cascade = CascadeType.ALL)
-    private List<SongPart> songParts = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "song_id")

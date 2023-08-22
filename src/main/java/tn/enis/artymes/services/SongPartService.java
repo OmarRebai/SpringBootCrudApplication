@@ -25,7 +25,8 @@ public class SongPartService {
     private final PartRepo partRepository;
 
     private final SongPartRepo songPartRepository;
-    private final ModelMapper modelMapper ;
+    private final ModelMapper modelMapper;
+
     @Autowired
 
     public SongPartService (SongRepo songRepository, PartRepo partRepository, SongPartRepo songPartRepository, ModelMapper modelMapper) {
@@ -41,20 +42,30 @@ public class SongPartService {
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
     }
-    private SongPartDto convertToDto (SongPart songPart) {
-        SongPartDto convertedSongJoinPart=modelMapper.map(songPart, SongPartDto.class);
-        convertedSongJoinPart.setSongId(songPart.getSong().getId());
-        return convertedSongJoinPart;
+
+    public List<SongPartDto> getAllPartsBySongId (Long songId) {
+        List<SongPart> songParts = songPartRepository.findAllBySongIdOrderByRank(songId);
+        return songParts.stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
     }
-    public SongPart addPartToSong(Long songId, Long partId) {
+
+    private SongPartDto convertToDto (SongPart songPart) {
+        SongPartDto convertedSongPart = modelMapper.map(songPart, SongPartDto.class);
+        convertedSongPart.setSongId(songPart.getSong().getId());
+        return convertedSongPart;
+    }
+
+    public SongPartDto addPartToSong (Long songId, Long partId, Long rank) {
         Song song = songRepository.findById(songId).orElseThrow(() -> new EntityNotFoundException("Song not found"));
         Part part = partRepository.findById(partId).orElseThrow(() -> new EntityNotFoundException("Part not found"));
 
         SongPart songPart = new SongPart();
         songPart.setSong(song);
         songPart.setPart(part);
+        songPart.setRank(rank);
 
-        return songPartRepository.save(songPart);
+        return convertToDto(songPartRepository.save(songPart));
     }
 
 
