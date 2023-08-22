@@ -29,5 +29,4 @@ public class SongPartController {
     public ResponseEntity<List<SongPartDto>> getAllSongParts(){
         return new ResponseEntity<>(songPartService.getAllParts(),HttpStatus.OK);
     }
-    // Other controller methods for managing Song, Part, and SongPart entities
 }
