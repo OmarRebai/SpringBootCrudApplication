@@ -8,5 +8,5 @@ import lombok.Setter;
 public class PartDto {
     private Long id;
     private String name;
-    private Long song_id;
+    private Long songId;
 }

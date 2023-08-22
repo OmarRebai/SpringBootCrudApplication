@@ -4,10 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import tn.enis.artymes.dto.SongDto;
+import tn.enis.artymes.dto.PartDto;
 import tn.enis.artymes.model.Part;
 import tn.enis.artymes.services.PartService;
-import tn.enis.artymes.services.SongService;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -27,9 +26,9 @@ public class PartController {
 
 
     @PostMapping
-    public ResponseEntity<Part> addPart(@Valid @RequestBody Part part) {
-        Part newPart = partService.createPart(part);
-        return new ResponseEntity<>(newPart, HttpStatus.CREATED);
+    public ResponseEntity<PartDto> addPart(@Valid @RequestBody PartDto partDto) {
+        PartDto newPartDto = partService.createPart(partDto);
+        return new ResponseEntity<>(newPartDto, HttpStatus.CREATED);
     }
 
     @GetMapping("/all")
