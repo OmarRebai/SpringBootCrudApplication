@@ -5,7 +5,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tn.enis.artymes.dto.SongDto;
-import tn.enis.artymes.model.Song;
 import tn.enis.artymes.services.SongService;
 
 import javax.validation.Valid;

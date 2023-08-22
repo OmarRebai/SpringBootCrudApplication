@@ -1,5 +1,6 @@
 package tn.enis.artymes.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,8 +26,15 @@ public class Part {
     @OneToMany(mappedBy = "part")
     private List<Bar> bars = new ArrayList<>();
 
+    @OneToMany(mappedBy = "part", cascade = CascadeType.ALL)
+    private List<SongPart> songParts = new ArrayList<>();
+
     @ManyToOne
     @JoinColumn(name = "song_id")
+    @JsonIgnore
     private Song song;
+
+
+
 
 }

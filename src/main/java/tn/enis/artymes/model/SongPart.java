@@ -12,8 +12,8 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
-@Table(name = "song_join_part")
-public class SongJoinPart {
+@Table(name = "song_part")
+public class SongPart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

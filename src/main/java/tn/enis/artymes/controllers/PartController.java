@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/v1/part")
+@RequestMapping("/api/v1/parts")
 @CrossOrigin("*")
 public class PartController {
 
@@ -31,11 +31,12 @@ public class PartController {
         return new ResponseEntity<>(newPartDto, HttpStatus.CREATED);
     }
 
-    @GetMapping("/all")
+    @GetMapping
     public ResponseEntity<List<Part>> getAllParts() {
         List<Part> parts = partService.getAllParts();
         return new ResponseEntity<>(parts, HttpStatus.OK);
     }
+
 
 
 
