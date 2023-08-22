@@ -26,7 +26,7 @@ public class PartController {
     }
 
 
-    @PostMapping("/add")
+    @PostMapping
     public ResponseEntity<Part> addPart(@Valid @RequestBody Part part) {
         Part newPart = partService.createPart(part);
         return new ResponseEntity<>(newPart, HttpStatus.CREATED);

@@ -1,6 +1,7 @@
 package tn.enis.artymes.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
@@ -38,7 +39,8 @@ public class Client implements Serializable {
     private String imageUrl;
 
     @OneToMany(mappedBy = "client")
-	@JsonSerialize(using = SongListSerializer.class)
+//	@JsonSerialize(using = SongListSerializer.class)
+    @JsonIgnore
     private List<Song> songs = new ArrayList<>();
 
 }

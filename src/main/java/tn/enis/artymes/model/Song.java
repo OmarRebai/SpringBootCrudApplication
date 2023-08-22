@@ -1,9 +1,6 @@
 package tn.enis.artymes.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -39,7 +36,6 @@ public class Song {
 
 	@ManyToOne
 	@JoinColumn(name = "client_id")
-	@JsonSerialize(using = ClientSerializer.class)
 	private Client client;
 
 	@OneToMany(mappedBy = "song")

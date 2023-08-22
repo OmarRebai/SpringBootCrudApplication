@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/v1/song")
+@RequestMapping("/api/v1/songs")
 @CrossOrigin("*")
 public class SongController {
     private final SongService songService;
@@ -23,13 +23,13 @@ public class SongController {
         this.songService = songService;
     }
 
-    @PostMapping("/add")
+    @PostMapping
     public ResponseEntity<SongDto> addSong (@Valid @RequestBody SongDto songDto) {
         SongDto newSong = songService.createSong(songDto);
         return new ResponseEntity<>(newSong, HttpStatus.CREATED);
     }
 
-    @GetMapping("/all")
+    @GetMapping
     public ResponseEntity<List<SongDto>> getAllSongs () {
         List<SongDto> songs = songService.getAllSongs();
         return new ResponseEntity<>(songs, HttpStatus.OK);
@@ -43,15 +43,15 @@ public class SongController {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @DeleteMapping("delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteSong (@PathVariable Long id) {
         songService.deleteSong(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @GetMapping("/entities")
-    public ResponseEntity<List<Song>> getAllSongEntities () {
-        List<Song> songs = songService.getAllSongsEntities();
-        return new ResponseEntity<>(songs, HttpStatus.OK);
-    }
+//    @GetMapping("/entities")
+//    public ResponseEntity<List<Song>> getAllSongEntities () {
+//        List<Song> songs = songService.getAllSongsEntities();
+//        return new ResponseEntity<>(songs, HttpStatus.OK);
+//    }
 }
