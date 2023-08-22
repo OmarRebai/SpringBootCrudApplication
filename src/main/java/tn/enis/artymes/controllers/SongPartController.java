@@ -19,7 +19,7 @@ public class SongPartController {
     @Autowired
     private SongPartService songPartService;
 
-    @PostMapping("/addPartToSong")
+    @PostMapping
     public ResponseEntity<SongPart> addPartToSong (@RequestBody Long songId, @RequestBody Long partId) {
         SongPart songPart = songPartService.addPartToSong(songId, partId);
         return new ResponseEntity<>(songPart, HttpStatus.CREATED);

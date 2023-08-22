@@ -26,6 +26,7 @@ public class SongPart {
     @JoinColumn(name = "part_id")
     private Part part;
 
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int rank;
 
 }

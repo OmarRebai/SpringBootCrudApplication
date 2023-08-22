@@ -20,17 +20,20 @@ import java.util.stream.Collectors;
 public class SongPartService {
 
 
-    @Autowired
-    private SongRepo songRepository;
+    private final SongRepo songRepository;
 
-    @Autowired
-    private PartRepo partRepository;
+    private final PartRepo partRepository;
 
+    private final SongPartRepo songPartRepository;
+    private final ModelMapper modelMapper ;
     @Autowired
-    private SongPartRepo songPartRepository;
-    @Autowired
-    private ModelMapper modelMapper ;
 
+    public SongPartService (SongRepo songRepository, PartRepo partRepository, SongPartRepo songPartRepository, ModelMapper modelMapper) {
+        this.songRepository = songRepository;
+        this.partRepository = partRepository;
+        this.songPartRepository = songPartRepository;
+        this.modelMapper = modelMapper;
+    }
 
     public List<SongPartDto> getAllParts () {
         List<SongPart> songParts = songPartRepository.findAll();
