@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class SongJoinPartDto {
+public class SongPartDto {
     private Long id;
     private Long songId;
     private Long partId;
