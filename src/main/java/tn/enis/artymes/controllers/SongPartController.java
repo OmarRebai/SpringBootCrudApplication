@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tn.enis.artymes.dto.SongPartDto;
+import tn.enis.artymes.dto.SongPartResponseDto;
 import tn.enis.artymes.services.SongPartService;
 
 import javax.validation.Valid;
@@ -36,7 +37,7 @@ public class SongPartController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<List<SongPartDto>> getAllSongPartsBySongId (@PathVariable Long id) {
+    public ResponseEntity<List<SongPartResponseDto>> getAllSongPartsBySongId (@PathVariable Long id) {
         return new ResponseEntity<>(songPartService.getAllPartsBySongId(id), HttpStatus.OK);
     }
 }

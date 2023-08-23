@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.enis.artymes.dto.SongPartDto;
+import tn.enis.artymes.dto.SongPartResponseDto;
 import tn.enis.artymes.model.Part;
 import tn.enis.artymes.model.Song;
 import tn.enis.artymes.model.SongPart;
@@ -39,22 +40,17 @@ public class SongPartService {
     public List<SongPartDto> getAllParts () {
         List<SongPart> songParts = songPartRepository.findAll();
         return songParts.stream()
-                .map(this::convertToDto)
+                .map(songPart -> modelMapper.map(songPart, SongPartDto.class))
                 .collect(Collectors.toList());
     }
 
-    public List<SongPartDto> getAllPartsBySongId (Long songId) {
+    public List<SongPartResponseDto> getAllPartsBySongId (Long songId) {
         List<SongPart> songParts = songPartRepository.findAllBySongIdOrderByRank(songId);
         return songParts.stream()
-                .map(this::convertToDto)
+                .map(songPart -> modelMapper.map(songPart, SongPartResponseDto.class))
                 .collect(Collectors.toList());
     }
 
-    private SongPartDto convertToDto (SongPart songPart) {
-        SongPartDto convertedSongPart = modelMapper.map(songPart, SongPartDto.class);
-        convertedSongPart.setSongId(songPart.getSong().getId());
-        return convertedSongPart;
-    }
 
     public SongPartDto addPartToSong (Long songId, Long partId, Long rank) {
         Song song = songRepository.findById(songId).orElseThrow(() -> new EntityNotFoundException("Song not found"));
@@ -65,7 +61,7 @@ public class SongPartService {
         songPart.setPart(part);
         songPart.setRank(rank);
 
-        return convertToDto(songPartRepository.save(songPart));
+        return modelMapper.map(songPartRepository.save(songPart), SongPartDto.class);
     }
 
 

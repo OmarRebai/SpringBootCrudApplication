@@ -11,8 +11,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class SongPartDto {
-    private Long songId;
-    private Long partId;
+public class SongPartResponseDto {
+    private String partName;
     private Long rank;
 }
