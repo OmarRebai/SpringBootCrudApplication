@@ -8,9 +8,10 @@ import tn.enis.artymes.services.ClientService;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/v1/client")
+@RequestMapping("/api/v1/clients")
 @CrossOrigin("*")
 public class ClientController {
     private final ClientService clientService;
@@ -19,32 +20,29 @@ public class ClientController {
         this.clientService = clientService;
     }
 
-    @GetMapping
-    public ResponseEntity<String> sayHello(){
-        return ResponseEntity.ok("Hello form our API");
-    }
-    @GetMapping("/goodbye")
-    public ResponseEntity<String> sayGoodBye(){
-        return ResponseEntity.ok("Good bye <3");
-    }
 
-    @GetMapping("/all")
+    @GetMapping
     public ResponseEntity<List<Client>> getAllClients(){
         List<Client> clients = clientService.findAllClients();
         return new ResponseEntity<>(clients, HttpStatus.OK);
     }
+    @GetMapping("/{id}")
+    public ResponseEntity<Optional<Client>> getClientById(@PathVariable Long id){
+        Optional<Client> clients = clientService.findClientById(id);
+        return new ResponseEntity<>(clients, HttpStatus.OK);
+    }
 
-    @PostMapping("/add")
+    @PostMapping
     public ResponseEntity<Client> addClient(@Valid @RequestBody Client client){
         Client newClient = clientService.addClient(client);
         return new ResponseEntity<>(newClient,HttpStatus.CREATED);
     }
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteClient(@PathVariable("id") Long id){
         clientService.deleteClient(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-    @PutMapping("/update")
+    @PutMapping
     public ResponseEntity<Client> updateClient(@RequestBody Client client){
         Client updateClient = clientService.updateClient(client);
         return new ResponseEntity<>(updateClient,HttpStatus.OK);
