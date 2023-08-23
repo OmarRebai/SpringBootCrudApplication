@@ -36,12 +36,17 @@ public class PartController {
         List<Part> parts = partService.getAllParts();
         return new ResponseEntity<>(parts, HttpStatus.OK);
     }
+    @GetMapping("song/{id}")
+    public ResponseEntity<List<PartDto>> getAllPartsBySongId(@PathVariable Long id) {
+        List<PartDto> parts = partService.getPartBySongId(id);
+        return new ResponseEntity<>(parts, HttpStatus.OK);
+    }
 
 
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<Part> getSongById(@PathVariable Long id) {
+    public ResponseEntity<Part> getPartById(@PathVariable Long id) {
         Optional<Part> partOptional = partService.getPartById(id);
         return partOptional.map(song -> new ResponseEntity<>(song, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));

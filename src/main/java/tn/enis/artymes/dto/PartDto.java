@@ -6,7 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class PartDto {
-    private Long id;
-    private String name;
+    private Long partId;
     private Long songId;
+    private String partName;
 }

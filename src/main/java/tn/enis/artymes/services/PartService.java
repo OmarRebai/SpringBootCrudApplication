@@ -11,6 +11,7 @@ import tn.enis.artymes.repo.SongRepo;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class PartService {
@@ -39,14 +40,19 @@ public class PartService {
         return partRepo.findById(id);
     }
 
+    public List<PartDto> getPartBySongId (Long id) {
+        List<Part> parts = partRepo.findAllBySongId(id);
+        return parts.stream()
+                .map(songPart -> modelMapper.map(songPart, PartDto.class))
+                .collect(Collectors.toList());
+    }
+
     public void deletePart (Long id) {
         partRepo.deleteById(id);
     }
 
     private PartDto convertToDto (Part part) {
-        PartDto convertedPart = modelMapper.map(part, PartDto.class);
-        convertedPart.setSongId(part.getSong().getId());
-        return convertedPart;
+        return modelMapper.map(part, PartDto.class);
     }
 
 

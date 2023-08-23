@@ -7,6 +7,7 @@ import tn.enis.artymes.model.Client;
 import tn.enis.artymes.repo.ClientRepo;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ClientService {
@@ -23,9 +24,10 @@ public class ClientService {
     public List<Client> findAllClients(){
         return clientRepo.findAll();
     }
-    public List<Client> findAllClientsByOrderByName(){
-        return clientRepo.findClientByOrderByName();
+    public Optional<Client> findClientById(Long id){
+        return clientRepo.findClientById(id);
     }
+
 
     public Client updateClient(Client client){
         return clientRepo.save(client);
