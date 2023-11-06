@@ -1,5 +1,6 @@
 package tn.enis.artymes.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,6 +29,7 @@ public class Song {
 	private Client client;
 
 	@OneToMany(mappedBy = "song")
+	@JsonIgnore
 	private List<Part> parts = new ArrayList<>();
 
 //	public Song(Long id, String title, String beatUrl, Client client) {

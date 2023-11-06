@@ -27,8 +27,8 @@ public class PartService {
         this.modelMapper = modelMapper;
     }
 
-    public PartDto createPart (PartDto partDto) {
-        return convertToDto(partRepo.save(convertToEntity(partDto)));
+    public Part createPart (PartDto partDto) {
+        return  partRepo.save(convertToEntity(partDto));
     }
 
     public List<Part> getAllParts () {
@@ -51,9 +51,7 @@ public class PartService {
         partRepo.deleteById(id);
     }
 
-    private PartDto convertToDto (Part part) {
-        return modelMapper.map(part, PartDto.class);
-    }
+
 
 
     private Part convertToEntity (PartDto partDto) {

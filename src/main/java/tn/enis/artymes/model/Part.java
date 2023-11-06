@@ -24,12 +24,12 @@ public class Part {
     private String name;
 
     @OneToMany(mappedBy = "part")
+    @JsonIgnore
     private List<Bar> bars = new ArrayList<>();
 
 
     @ManyToOne
     @JoinColumn(name = "song_id")
-    @JsonIgnore
     private Song song;
 
 

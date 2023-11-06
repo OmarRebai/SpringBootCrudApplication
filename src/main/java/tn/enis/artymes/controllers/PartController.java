@@ -10,7 +10,6 @@ import tn.enis.artymes.services.PartService;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/parts")
@@ -24,37 +23,33 @@ public class PartController {
         this.partService = partService;
     }
 
-
-    @PostMapping
-    public ResponseEntity<PartDto> addPart(@Valid @RequestBody PartDto partDto) {
-        PartDto newPartDto = partService.createPart(partDto);
-        return new ResponseEntity<>(newPartDto, HttpStatus.CREATED);
-    }
-
-    @GetMapping
-    public ResponseEntity<List<Part>> getAllParts() {
-        List<Part> parts = partService.getAllParts();
-        return new ResponseEntity<>(parts, HttpStatus.OK);
-    }
     @GetMapping("song/{id}")
     public ResponseEntity<List<PartDto>> getAllPartsBySongId(@PathVariable Long id) {
         List<PartDto> parts = partService.getPartBySongId(id);
         return new ResponseEntity<>(parts, HttpStatus.OK);
     }
-
-
-
-
-    @GetMapping("/{id}")
-    public ResponseEntity<Part> getPartById(@PathVariable Long id) {
-        Optional<Part> partOptional = partService.getPartById(id);
-        return partOptional.map(song -> new ResponseEntity<>(song, HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    @PostMapping
+    public ResponseEntity<Part> createPart(@Valid @RequestBody PartDto partDto) {
+        Part newPartDto = partService.createPart(partDto);
+        return new ResponseEntity<>(newPartDto, HttpStatus.CREATED);
     }
 
-    @DeleteMapping("delete/{id}")
-    public ResponseEntity<Void> deleteSong(@PathVariable Long id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletePart(@PathVariable Long id) {
         partService.deletePart(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
+
+//    @GetMapping
+//    public ResponseEntity<List<Part>> getAllParts() {
+//        List<Part> parts = partService.getAllParts();
+//        return new ResponseEntity<>(parts, HttpStatus.OK);
+//    }
+
+//    @GetMapping("/{id}")
+//    public ResponseEntity<Part> getPartById(@PathVariable Long id) {
+//        Optional<Part> partOptional = partService.getPartById(id);
+//        return partOptional.map(song -> new ResponseEntity<>(song, HttpStatus.OK))
+//                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+//    }
