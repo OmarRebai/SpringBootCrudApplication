@@ -48,9 +48,8 @@ public class SongController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-//    @GetMapping("/entities")
-//    public ResponseEntity<List<Song>> getAllSongEntities () {
-//        List<Song> songs = songService.getAllSongsEntities();
-//        return new ResponseEntity<>(songs, HttpStatus.OK);
-//    }
+    @GetMapping("/entities")
+    public ResponseEntity<List<SongDto>> getAllSongEntities () {
+		return ResponseEntity.ok(songService.getAllSongsEntities());
+    }
 }

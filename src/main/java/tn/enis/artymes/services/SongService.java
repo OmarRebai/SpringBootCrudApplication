@@ -39,6 +39,13 @@ public class SongService {
                 .collect(Collectors.toList());
     }
 
+    public List<SongDto> getAllSongsEntities() {
+        return songRepository.findAll().stream().map(song -> modelMapper.map(song, SongDto.class)).toList();
+    }
+//        private EntireSongDto convertToEntireDto(Song song) {
+//        return modelMapper.map(song, EntireSongDto.class);
+//    }
+
     public Optional<SongDto> getSongById (Long id) {
         Optional<Song> songOptional = songRepository.findById(id);
         return songOptional.map(this::convertToDto);
